@@ -1,0 +1,1249 @@
+{
+	"info": {
+		"_postman_id": "4937e0da-ee12-4003-9908-03ccbdb5abff",
+		"name": "TechChallengeRequest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20301454",
+		"_collection_link": "https://restless-moon-592362.postman.co/workspace/Parking-Spot-Endpoints~f9d62ebb-5fbd-4291-a5b0-689e75a86f4d/collection/20301454-4937e0da-ee12-4003-9908-03ccbdb5abff?action=share&source=collection_link&creator=20301454"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Telephones - Vacation\r",
+							"\r",
+							"var ddd = _.random(10, 99);\r",
+							"var aditionalNumber = _.random(9, 9);\r",
+							"var firstDigits = _.random(1000, 9999);\r",
+							"var lastDigits = _.random(1000, 9999);\r",
+							"\r",
+							"var telephone = `${ddd} ${aditionalNumber} ${firstDigits}-${lastDigits}`;\r",
+							"\r",
+							"pm.environment.set(\"telephone\", telephone);\r",
+							"\r",
+							"// CNPJ\r",
+							"\r",
+							"var firstBlock = _.random(10, 99);\r",
+							"var secondBlock = _.random(100, 999);\r",
+							"var thirdBlock = _.random(100, 999);\r",
+							"var fourthBlock = _.random(1000, 9999);\r",
+							"var fifthBlock = _.random(10, 99);\r",
+							"\r",
+							"var cnpj = `${firstBlock}.${secondBlock}.${thirdBlock}/${fourthBlock}-${fifthBlock}`;\r",
+							"\r",
+							"pm.environment.set('cnpj', cnpj);\r",
+							"\r",
+							"// Password\r",
+							"\r",
+							"let email = pm.variables.replaceIn('{{$randomEmail}}');\r",
+							"let password = pm.variables.replaceIn('{{$randomPassword}}');\r",
+							"\r",
+							"postman.setGlobalVariable(\"EMAIL\", email);\r",
+							"postman.setGlobalVariable(\"PASSWORD\", password);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"phone\": \"{{telephone}}\",\r\n  \"cnpj\": \"{{cnpj}}\",\r\n  \"password\": \"{{PASSWORD}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/user",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"    pm.response.to.have.jsonBody(\"name\");\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"password\": \"{{PASSWORD}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginWithError",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login\", function() {\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"messages\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"{{$randomPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePassword",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let newPassword = pm.variables.replaceIn('{{$randomPassword}}');\r",
+							"\r",
+							"postman.setGlobalVariable(\"NEWPASSWORD\", newPassword);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"change password\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    var newPassword = postman.getGlobalVariable(\"NEWPASSWORD\");\r",
+							"\r",
+							"    pm.environment.set(\"PASSWORD\", newPassword);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"currentPassword\": \"{{PASSWORD}}\",\r\n  \"newPassword\": \"{{NEWPASSWORD}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/user/update-password",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"user",
+						"update-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAfterPasswordChange",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"    pm.response.to.have.jsonBody(\"name\");\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"password\": \"{{PASSWORD}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateVariableIncomeFII",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var fiiName = `{{$randomCompanySuffix}}11`;\r",
+							"pm.environment.set('fiiName', fiiName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"investmentVariableType\");\r",
+							"    pm.response.to.have.jsonBody(\"sender\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"name\": \"{{fiiName}}\",\r\n  \"minimumInvestment\": {{$randomPrice}},\r\n  \"investmentVariableType\": 1,\r\n  \"dividends\": {{$randomPrice}},\r\n  \"sector\": {{tijolo}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/variableincome",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"variableincome"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateVariableIncomeAcao",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var classNumber = _.random(1, 9);\r",
+							"\r",
+							"var acaoName = `{{$randomCompanySuffix}}${classNumber}`;\r",
+							"pm.environment.set('acaoName', acaoName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"id\");\r",
+							"    pm.response.to.have.jsonBody(\"sector\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"name\": \"{{acaoName}}\",\r\n  \"minimumInvestment\": {{$randomPrice}},\r\n  \"investmentVariableType\": {{acao}},\r\n  \"dividends\": {{$randomPrice}},\r\n  \"sector\": {{hibrido}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/variableincome",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"variableincome"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDashboardVariableIncomes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"investments\");\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.investments).to.be.an('array');\r",
+							"\r",
+							"    pm.environment.set(\"ID\", jsonData.investments[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nameOrSender\": \"\",\r\n  \"type\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/dashboard",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetByIdVariableIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/variableIncome/{{ID}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"variableIncome",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateVariableIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"id\");\r",
+							"    pm.response.to.have.jsonBody(\"sector\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var classNumber = _.random(1, 9);\r",
+							"\r",
+							"var acaoName = `{{$randomCompanySuffix}}${classNumber}`;\r",
+							"pm.environment.set('acaoName', acaoName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"name\": \"{{acaoName}}\",\r\n  \"minimumInvestment\": {{$randomPrice}},\r\n  \"investmentVariableType\": {{acao}},\r\n  \"dividends\": {{$randomPrice}},\r\n  \"sector\": {{hibrido}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/variableIncome/{{ID}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"variableIncome",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteVariableIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.noBody;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var classNumber = _.random(1, 9);\r",
+							"\r",
+							"var acaoName = `{{$randomCompanySuffix}}${classNumber}`;\r",
+							"pm.environment.set('acaoName', acaoName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/variableIncome/{{ID}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"variableIncome",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFixedIncomeTD",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var cdb = 0;\r",
+							"pm.environment.set('CDB', cdb);\r",
+							"\r",
+							"var tesouroDireto = 1;\r",
+							"pm.environment.set('tesouroDireto', tesouroDireto);\r",
+							"\r",
+							"// ir\r",
+							"const ir = _.random(10, 20);\r",
+							"pm.environment.set(\"ir\", ir);\r",
+							"\r",
+							"//profitability\r",
+							"const integerPart = _.random(5, 20);\r",
+							"const decimalPart = _.random(0, 99) / 100;\r",
+							"const profitability = (integerPart + decimalPart).toFixed(2);\r",
+							"\r",
+							"// Converte o número para string e adiciona a unidade \"% a.a.\"\r",
+							"const profitabilityString = profitability.toString() + \"% a.a.\";\r",
+							"\r",
+							"pm.environment.set(\"profitability\", profitabilityString);\r",
+							"\r",
+							"// date \"2024-12-28T16:49:56.458Z\"\r",
+							"const startYear = 2025;\r",
+							"const endYear = 2050;\r",
+							"const randomYear = _.random(startYear, endYear);\r",
+							"\r",
+							"const currentDate = new Date();\r",
+							"currentDate.setFullYear(randomYear);\r",
+							"\r",
+							"const isoDate = currentDate.toISOString();\r",
+							"\r",
+							"pm.environment.set(\"customDate\", isoDate);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"investmentFixedType\");\r",
+							"    pm.response.to.have.jsonBody(\"sender\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"minimumInvestment\": \"{{$randomPrice}}\",\r\n  \"investmentFixedType\": {{tesouroDireto}},\r\n  \"profitability\": \"{{profitability}}\",\r\n  \"maturityDate\": \"{{customDate}}\",\r\n  \"ir\": \"{{ir}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFixedIncomeCDB",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var cdb = 0;\r",
+							"pm.environment.set('CDB', cdb);\r",
+							"\r",
+							"var tesouroDireto = 1;\r",
+							"pm.environment.set('tesouroDireto', tesouroDireto);\r",
+							"\r",
+							"// ir\r",
+							"const ir = _.random(10, 20);\r",
+							"pm.environment.set(\"ir\", ir);\r",
+							"\r",
+							"//profitability\r",
+							"const integerPart = _.random(5, 20);\r",
+							"const decimalPart = _.random(0, 99) / 100;\r",
+							"const profitability = (integerPart + decimalPart).toFixed(2);\r",
+							"\r",
+							"// Converte o número para string e adiciona a unidade \"% a.a.\"\r",
+							"const profitabilityString = \"IPCA + \" + profitability.toString() + \"% a.a.\";\r",
+							"\r",
+							"pm.environment.set(\"profitability\", profitabilityString);\r",
+							"\r",
+							"// date \"2024-12-28T16:49:56.458Z\"\r",
+							"const startYear = 2025;\r",
+							"const endYear = 2050;\r",
+							"const randomYear = _.random(startYear, endYear);\r",
+							"\r",
+							"const currentDate = new Date();\r",
+							"currentDate.setFullYear(randomYear);\r",
+							"\r",
+							"const isoDate = currentDate.toISOString();\r",
+							"\r",
+							"pm.environment.set(\"customDate\", isoDate);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"minimumInvestment\": \"{{$randomPrice}}\",\r\n  \"investmentFixedType\": {{CDB}},\r\n  \"profitability\": \"{{profitability}}\",\r\n  \"maturityDate\": \"{{customDate}}\",\r\n  \"ir\": \"{{ir}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array');\r",
+							"\r",
+							"    pm.environment.set(\"IdFixed\", jsonData[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome/all",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTesouroDiretoFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsIm5iZiI6MTcwMzc5Mjc2MiwiZXhwIjoxNzAzODUyNzYyLCJpYXQiOjE3MDM3OTI3NjJ9.Gdx92ymL0mw1Oqgrrf5mbT9RCPW4JhBkjHAvzx4TYbk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome/tesourodireto",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome",
+						"tesourodireto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCDBFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array');\r",
+							"\r",
+							"    pm.environment.set(\"IdFixed\", jsonData[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome/cdb",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome",
+						"cdb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetByIdFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/fixedincome/{{IdFixed}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedincome",
+						"{{IdFixed}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate request with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"id\");\r",
+							"    pm.response.to.have.jsonBody(\"ir\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var classNumber = _.random(1, 9);\r",
+							"\r",
+							"var acaoName = `{{$randomCompanySuffix}}${classNumber}`;\r",
+							"pm.environment.set('acaoName', acaoName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"{{$randomCompanyName}}\",\r\n  \"minimumInvestment\": \"{{$randomPrice}}\",\r\n  \"investmentFixedType\": {{CDB}},\r\n  \"profitability\": \"{{profitability}}\",\r\n  \"maturityDate\": \"{{customDate}}\",\r\n  \"ir\": \"{{ir}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/fixedIncome/{{IdFixed}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedIncome",
+						"{{IdFixed}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFixedIncome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete with successfull\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.noBody;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Investments\r",
+							"var acao = 0;\r",
+							"pm.environment.set('acao', acao);\r",
+							"\r",
+							"var fii = 1;\r",
+							"pm.environment.set('fii', fii);\r",
+							"\r",
+							"// Sectors\r",
+							"var tijolo = 0;\r",
+							"pm.environment.set('tijolo', tijolo);\r",
+							"\r",
+							"var papel = 1;\r",
+							"pm.environment.set('papel', papel);\r",
+							"\r",
+							"var hibrido = 2;\r",
+							"pm.environment.set('hibrido', hibrido);\r",
+							"\r",
+							"var classNumber = _.random(1, 9);\r",
+							"\r",
+							"var acaoName = `{{$randomCompanySuffix}}${classNumber}`;\r",
+							"pm.environment.set('acaoName', acaoName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/fixedIncome/{{IdFixed}}",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"fixedIncome",
+						"{{IdFixed}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URLBASE",
+			"value": "https://localhost:7130",
+			"type": "string"
+		}
+	]
+}

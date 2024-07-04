@@ -1,0 +1,118 @@
+2024-07-03 00:30:39.655 -03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2024-07-03 00:30:39.752 -03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2024-07-03 00:30:39.763 -03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2024-07-03 00:30:39.769 -03:00 [DBG] Key ring with default key {b49bcc1f-5cf4-4ac0-b876-9a127033cd46} was loaded during application startup.
+2024-07-03 00:30:40.341 -03:00 [INF] Now listening on: https://localhost:7130
+2024-07-03 00:30:40.353 -03:00 [INF] Now listening on: http://localhost:5128
+2024-07-03 00:30:40.398 -03:00 [DBG] Loaded hosting startup assembly Api
+2024-07-03 00:30:40.399 -03:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2024-07-03 00:30:40.402 -03:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2024-07-03 00:30:41.780 -03:00 [DBG] Connection 0HN4R221LRMF4 established using the following protocol: "Tls13"
+2024-07-03 00:30:41.853 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/index.html - null null
+2024-07-03 00:30:42.000 -03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-07-03 00:30:42.028 -03:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-07-03 00:30:42.029 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:30:42.109 -03:00 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-07-03 00:30:42.111 -03:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-07-03 00:30:42.127 -03:00 [DBG] Response markup was updated to include Browser Link script injection.
+2024-07-03 00:30:42.129 -03:00 [DBG] Response markup was updated to include browser refresh script injection.
+2024-07-03 00:30:42.132 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/index.html - 200 null text/html;charset=utf-8 290.4639ms
+2024-07-03 00:30:42.150 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_vs/browserLink - null null
+2024-07-03 00:30:42.150 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-03 00:30:42.181 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - 200 13742 application/javascript; charset=utf-8 31.2725ms
+2024-07-03 00:30:42.234 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_vs/browserLink - 200 null text/javascript; charset=UTF-8 84.1213ms
+2024-07-03 00:30:42.598 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/favicon-32x32.png - null null
+2024-07-03 00:30:42.832 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - null null
+2024-07-03 00:30:43.003 -03:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2024-07-03 00:30:43.003 -03:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-07-03 00:30:43.010 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:30:43.011 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:30:43.036 -03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-07-03 00:30:43.063 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/favicon-32x32.png - 200 628 image/png 465.3214ms
+2024-07-03 00:30:43.283 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 450.8682ms
+2024-07-03 00:30:50.577 -03:00 [DBG] Authentication of the HTTPS connection timed out.
+2024-07-03 00:30:50.577 -03:00 [DBG] Authentication of the HTTPS connection timed out.
+2024-07-03 00:30:50.584 -03:00 [DBG] Connection id "0HN4R221LRMF3" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-07-03 00:30:50.584 -03:00 [DBG] Connection id "0HN4R221LRMF2" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-07-03 00:31:14.724 -03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2024-07-03 00:31:14.799 -03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2024-07-03 00:31:14.803 -03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2024-07-03 00:31:14.813 -03:00 [DBG] Key ring with default key {b49bcc1f-5cf4-4ac0-b876-9a127033cd46} was loaded during application startup.
+2024-07-03 00:31:15.113 -03:00 [INF] Now listening on: https://localhost:7130
+2024-07-03 00:31:15.114 -03:00 [INF] Now listening on: http://localhost:5128
+2024-07-03 00:31:15.115 -03:00 [DBG] Loaded hosting startup assembly Api
+2024-07-03 00:31:15.116 -03:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2024-07-03 00:31:15.116 -03:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2024-07-03 00:31:15.160 -03:00 [DBG] Connection id "0HN4R22BVMKUS" received FIN.
+2024-07-03 00:31:15.160 -03:00 [DBG] Connection id "0HN4R22BVMKUR" received FIN.
+2024-07-03 00:31:15.177 -03:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2024-07-03 00:31:15.177 -03:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2024-07-03 00:31:15.227 -03:00 [DBG] Connection id "0HN4R22BVMKUR" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-07-03 00:31:15.227 -03:00 [DBG] Connection id "0HN4R22BVMKUS" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-07-03 00:31:15.578 -03:00 [DBG] Connection 0HN4R22BVMKUT established using the following protocol: "Tls13"
+2024-07-03 00:31:15.684 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/index.html - null null
+2024-07-03 00:31:15.826 -03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-07-03 00:31:15.874 -03:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-07-03 00:31:15.877 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:31:15.995 -03:00 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-07-03 00:31:15.998 -03:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-07-03 00:31:16.021 -03:00 [DBG] Response markup was updated to include Browser Link script injection.
+2024-07-03 00:31:16.027 -03:00 [DBG] Response markup was updated to include browser refresh script injection.
+2024-07-03 00:31:16.032 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/index.html - 200 null text/html;charset=utf-8 361.1777ms
+2024-07-03 00:31:16.062 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_vs/browserLink - null null
+2024-07-03 00:31:16.062 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-03 00:31:16.082 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - 200 13742 application/javascript; charset=utf-8 19.5517ms
+2024-07-03 00:31:16.139 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_vs/browserLink - 200 null text/javascript; charset=UTF-8 77.5064ms
+2024-07-03 00:31:16.275 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - null null
+2024-07-03 00:31:16.278 -03:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-07-03 00:31:16.279 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:31:16.485 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 210.3202ms
+2024-07-03 00:49:10.589 -03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2024-07-03 00:49:10.834 -03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2024-07-03 00:49:10.847 -03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2024-07-03 00:49:10.860 -03:00 [DBG] Key ring with default key {b49bcc1f-5cf4-4ac0-b876-9a127033cd46} was loaded during application startup.
+2024-07-03 00:49:11.449 -03:00 [INF] Now listening on: https://localhost:7130
+2024-07-03 00:49:11.450 -03:00 [INF] Now listening on: http://localhost:5128
+2024-07-03 00:49:11.450 -03:00 [DBG] Loaded hosting startup assembly Api
+2024-07-03 00:49:11.451 -03:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2024-07-03 00:49:11.451 -03:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2024-07-03 00:49:12.652 -03:00 [DBG] Connection 0HN4R2CCPAKAU established using the following protocol: "Tls13"
+2024-07-03 00:49:12.769 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/index.html - null null
+2024-07-03 00:49:12.960 -03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-07-03 00:49:12.998 -03:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-07-03 00:49:12.999 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:49:13.103 -03:00 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-07-03 00:49:13.108 -03:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-07-03 00:49:13.135 -03:00 [DBG] Response markup was updated to include Browser Link script injection.
+2024-07-03 00:49:13.136 -03:00 [DBG] Response markup was updated to include browser refresh script injection.
+2024-07-03 00:49:13.143 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/index.html - 200 null text/html;charset=utf-8 386.7843ms
+2024-07-03 00:49:13.171 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-03 00:49:13.178 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/_vs/browserLink - null null
+2024-07-03 00:49:13.199 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_framework/aspnetcore-browser-refresh.js - 200 13742 application/javascript; charset=utf-8 29.1753ms
+2024-07-03 00:49:13.313 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/_vs/browserLink - 200 null text/javascript; charset=UTF-8 135.2238ms
+2024-07-03 00:49:13.382 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/favicon-32x32.png - null null
+2024-07-03 00:49:13.389 -03:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2024-07-03 00:49:13.393 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:49:13.415 -03:00 [DBG] The file transmission was cancelled
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsyncCore(HttpResponse response, IFileInfo file, Int64 offset, Nullable`1 count, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsyncCore(HttpResponse response, IFileInfo file, Int64 offset, Nullable`1 count, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+2024-07-03 00:49:13.445 -03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-07-03 00:49:13.446 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/favicon-32x32.png - 499 628 image/png 64.4903ms
+2024-07-03 00:49:13.450 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - null null
+2024-07-03 00:49:13.453 -03:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-07-03 00:49:13.457 -03:00 [DBG] Request did not match any endpoints
+2024-07-03 00:49:13.743 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7130/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 292.1514ms
