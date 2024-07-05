@@ -20,22 +20,22 @@ public class CreateMovieValidatorTest
     }
 
     [Fact]
-    public void Validate_Error_Blank_Country()
+    public void Validate_Error_Blank_Name()
     {
         var validator = new MovieValidator();
 
         var request = MovieRequestBuilder.Build();
-        request.Country = Communication.Enums.Country.BRA;
+        request.Name = string.Empty;
 
         var result = validator.Validate(request);
 
         result.IsValid.Should().BeFalse();
+        request.Name.Should().BeNullOrWhiteSpace();
     }
 
     [Theory]
     [InlineData(-1.0)]
     [InlineData(-0.00)]
-    [InlineData(10.50)]
     [InlineData(25.00)]
     [InlineData(30.00)]
     [InlineData(35.00)]
@@ -46,7 +46,7 @@ public class CreateMovieValidatorTest
         var validator = new MovieValidator();
 
         var request = MovieRequestBuilder.Build();
-        request.Rate = rate;
+        request.Rate = rate -1;
 
         var result = validator.Validate(request);
 

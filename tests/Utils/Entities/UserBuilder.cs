@@ -14,7 +14,7 @@ public class UserBuilder
             .RuleFor(x => x.Id, _ => 1)
             .RuleFor(x => x.Name,f => f.Person.FullName)
             .RuleFor(x => x.Email,f => f.Person.Email)
-            .RuleFor(x => x.YearBorn, f => f.Person.DateOfBirth.AddYears(18).ToLongDateString())
+            .RuleFor(x => x.YearBorn, 18.ToString)
 			.RuleFor(x => x.Password, f =>
             {
                 password = f.Internet.Password();

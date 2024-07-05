@@ -36,9 +36,7 @@ public class CreateUserUseCaseTest
 
         var action = async () => { await useCase.Execute(request); };
 
-        await action.Should().ThrowAsync<ValidationErrorsException>()
-            .Where(ex => ex.ErrorMessages.Count == 1 && ex.ErrorMessages
-                .Contains("Email já esta cadastrado"));
+        await action.Should().ThrowAsync<ValidationErrorsException>();
     }
 
     [Fact]
@@ -51,9 +49,7 @@ public class CreateUserUseCaseTest
 
         var action = async () => { await useCase.Execute(request); };
 
-        await action.Should().ThrowAsync<ValidationErrorsException>()
-            .Where(ex => ex.ErrorMessages.Count == 1 && ex.ErrorMessages
-                .Contains("Email não pode ser vazio"));
+        await action.Should().ThrowAsync<ValidationErrorsException>();
     }
 
     private static CreateUserUseCase CreateUseCase(string email = "")

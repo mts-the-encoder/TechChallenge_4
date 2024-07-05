@@ -33,6 +33,6 @@ public class CreateMovieTest : ControllerBase
 
         var responseData = await JsonDocument.ParseAsync(responseBody);
 
-        responseData.RootElement.GetProperty("sender").GetString().Should().NotBeNullOrWhiteSpace();
+        responseData.RootElement.GetProperty("name").GetString().Should().NotBeNullOrWhiteSpace();
     }
 }
