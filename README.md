@@ -32,7 +32,7 @@ Este projeto é parte do Tech Challenge da FIAP, no qual desenvolvi uma aplicaç
 
 Esta API permite que o usuário se cadastre e faça controle de seus filmes antigos preferidos, podendo adicionar os filmes. Cada filme recebe uma classificação, que pode ser editada e/ou excluída.
 
-### Built With
+### Tecnologias
 
 - Windows 
 - VisualStudio
