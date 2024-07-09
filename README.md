@@ -28,8 +28,6 @@ O tema escolhido para este projeto foi sobre Filmes antigos. Essa aplicação te
 
 Este projeto é parte do Tech Challenge da FIAP, no qual desenvolvi uma aplicação utilizando .NET com C# e seguindo as práticas recomendadas da Arquitetura Limpa. A aplicação foi construída com foco na separação de preocupações, independência de UI, regra de negócio e infraestrutura, garantindo assim a qualidade do software.
 
-//Este projeto é uma API implementada em .NET Core 8 que foi construída utilizando a arquitetura Clean Architecture
-
 Esta API permite que o usuário se cadastre e faça controle de seus filmes antigos preferidos, podendo adicionar os filmes. Cada filme recebe uma classificação, que pode ser editada e/ou excluída.
 
 ### Tecnologias
