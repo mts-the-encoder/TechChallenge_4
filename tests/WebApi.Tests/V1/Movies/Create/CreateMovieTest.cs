@@ -35,4 +35,16 @@ public class CreateMovieTest : ControllerBase
 
         responseData.RootElement.GetProperty("name").GetString().Should().NotBeNullOrWhiteSpace();
     }
+
+    [Fact]
+    public async Task Validate_Failure()
+    {
+	    var token = string.Empty;
+
+	    var request = MovieRequestBuilder.Build();
+
+	    var response = await PostRequest(METHOD, request, token);
+
+	    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
 }

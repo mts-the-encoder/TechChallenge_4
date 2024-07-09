@@ -1,4 +1,5 @@
-﻿using Domain.Repositories.Movies;
+﻿using Domain.Entities;
+using Domain.Repositories.Movies;
 using Moq;
 
 namespace Utils.Repositories.Movies;
@@ -19,7 +20,15 @@ public class MovieReadOnlyRepositoryBuilder
         return _instance;
     }
 
-    public IMovieReadOnlyRepository Build()
+    public MovieReadOnlyRepositoryBuilder GetById(Movie movie)
+    {
+	    _repository.Setup(r => r.GetById(movie.Id)).ReturnsAsync(movie);
+
+	    return this;
+    }
+
+
+public IMovieReadOnlyRepository Build()
     {
         return _repository.Object;
     }

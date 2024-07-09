@@ -1,6 +1,5 @@
 ﻿using Application.Services.UserSigned;
 using Domain.Repositories.Movies;
-using Exceptions;
 using Exceptions.ExceptionBase;
 using Infrastructure.RepositoryAccess.UnitOfWork;
 
@@ -36,6 +35,6 @@ public class DeleteMovieUseCase : IDeleteMovieUseCase
     private static void Validate(Domain.Entities.User user, Domain.Entities.Movie movie)
     {
         if (movie.UserId != user.Id || movie is null)
-            throw new ValidationErrorsException(new List<string> { "Filme não encontrado" });
+            throw new ValidationErrorsException(["Filme não encontrado"]);
     }
 }
