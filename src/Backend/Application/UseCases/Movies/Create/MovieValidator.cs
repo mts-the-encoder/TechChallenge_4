@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using Communication.Requests;
-using Exceptions;
-using FluentMigrator.Infrastructure;
+﻿using Communication.Requests;
 using FluentValidation;
 
 namespace Application.UseCases.Movies.Create;
